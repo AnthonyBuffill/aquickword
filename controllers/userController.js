@@ -9,6 +9,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+ 
   async getSingleUser(req, res) {
     try {
       const user = await User.findOne({ _id: req.params.userId })
@@ -25,7 +26,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // create a new user
+
   async createUser(req, res) {
     try {
       const dbUserData = await User.create(req.body);
@@ -67,6 +68,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+  
   async createFriend(req, res) {
     try {
       const user = await User.findOneAndUpdate(
@@ -74,8 +76,7 @@ module.exports = {
         { $addToSet: { friends: req.params.friendId } },
         { new: true }
       );
-
-
+  
       res.json('Added a friend 🎉');
     } catch (err) {
       console.log(err);
